@@ -1,4 +1,6 @@
 class Squares
+  attr_reader :n
+
   def initialize(n)
     @n = n
   end
@@ -8,10 +10,10 @@ class Squares
   end
 
   def square_of_sums
-    ((@n * (1 + @n)) / 2)**2
+    ((n * (1 + n)) / 2)**2
   end
 
   def sum_of_squares
-    ((@n + 1) * @n * (2 * @n + 1)) / 6
+    ((n + 1) * n * (2 * n + 1)) / 6
   end
 end
