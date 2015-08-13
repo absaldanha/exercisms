@@ -1,58 +1,20 @@
-class Fixnum
+class Integer
 
-  NUMERALS = [
-    {
-      '1' => 'I',
-      '5' => 'V'
-    },
-    {
-      '1' => 'X',
-      '5' => 'L'
-    },
-    {
-      '1' => 'C',
-      '5' => 'D',
-    },
-    {
-      '1' => 'M'
-    }
-  ]
+  NUMERALS = {
+    1000  => 'M',
+    900   => 'CM', 500 => 'D', 400 => 'CD', 100 => 'C',
+    90    => 'XC', 50 => 'L',  40 => 'XL', 10 => 'X',
+    9     => 'IX', 5 => 'V', 4 => 'IV', 1 => 'I'
+  }
 
   def to_roman
-    digits = self.to_s.split('').reverse
-    roman = ''
-    digits.each_with_index do |digit, index|
-      # p roman_numeral(digit, index)
-      roman.prepend(roman_numeral(digit, index))
-    end
+    number = self
 
-    roman
-  end
-
-  def roman_numeral(digit, unit)
-    case digit.to_i
-    when 0
-      ''
-    when 1..3 
-      n = NUMERALS[unit]['1'].dup
-      (digit.to_i - 1).times do
-        n << NUMERALS[unit]['1']
+    NUMERALS.each_with_object('') do |(key, value), roman|
+      (number.div key).times do
+        roman << value
+        number -= key
       end
-      n
-    when 4
-      n = NUMERALS[unit]['1'].dup
-      n << NUMERALS[unit]['5']
-    when 5
-      NUMERALS[unit]['5']
-    when 6..8
-      n = NUMERALS[unit]['5'].dup
-      (digit.to_i - 5).times do
-        n << NUMERALS[unit]['1']
-      end
-      n
-    else
-      n = NUMERALS[unit]['1'].dup
-      n << NUMERALS[unit + 1]['1']
     end
   end
 end
