@@ -1,5 +1,6 @@
 class Robot
   ALPHABET = ('A'..'Z').to_a
+  NUMBERS = ('000'..'999').to_a
 
   attr_reader :name
 
@@ -14,6 +15,6 @@ class Robot
   private
 
   def generate_name
-    @name = 2.times.map { ALPHABET.sample }.join + rand(100..999).to_s
+    @name = 2.times.map { ALPHABET.sample }.join + NUMBERS.sample
   end
 end
