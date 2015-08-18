@@ -1,5 +1,5 @@
 class Robot
-  ALPHABET = ('A'..'Z').to_a
+  LETTERS = ('AA'..'ZZ').to_a
   NUMBERS = ('000'..'999').to_a
 
   attr_reader :name
@@ -15,6 +15,6 @@ class Robot
   private
 
   def generate_name
-    @name = 2.times.map { ALPHABET.sample }.join + NUMBERS.sample
+    @name = LETTERS.sample + NUMBERS.sample
   end
 end
