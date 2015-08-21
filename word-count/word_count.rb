@@ -14,7 +14,11 @@ class Phrase
 
   def count_words(phrase)
     phrase.split(WORD_REGEX).each do |word|
-      @word_count[word] += 1
+      @word_count[strip_quotes(word)] += 1
     end
+  end
+
+  def strip_quotes(word)
+    (word.start_with?("'") && word.end_with?("'")) ? word[1..-2] : word
   end
 end

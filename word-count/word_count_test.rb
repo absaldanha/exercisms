@@ -77,7 +77,6 @@ class PhraseTest < Minitest::Test
   end
 
   def test_with_quotations
-    skip
     phrase = Phrase.new("Joe can't tell between 'large' and large.")
     counts = {
       'joe' => 1, "can't" => 1, 'tell' => 1,
