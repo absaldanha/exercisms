@@ -3,7 +3,7 @@ class Phrase
 
   attr_reader :word_count
 
-  WORD_REGEX = /[^a-zA-Z0-9_']+/
+  WORD_REGEX = /\w+(?:'\w+)?/
 
   def initialize(phrase)
     @word_count = Hash.new(0)
@@ -13,12 +13,8 @@ class Phrase
   private
 
   def count_words(phrase)
-    phrase.split(WORD_REGEX).each do |word|
-      @word_count[strip_quotes(word)] += 1
+    phrase.scan(WORD_REGEX).each do |word|
+      @word_count[word] += 1
     end
-  end
-
-  def strip_quotes(word)
-    (word.start_with?("'") && word.end_with?("'")) ? word[1..-2] : word
   end
 end
