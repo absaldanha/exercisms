@@ -1,8 +1,11 @@
 class Bob
+  BLANK = /\A[[:space:]]*\z/
+  YELL = /[[:upper:]]+/
+
   def hey(remark)
     return 'Whoa, chill out!' if yell? remark
     return 'Sure.' if question? remark
-    return 'Fine.' if nothing_said? remark
+    return 'Fine. Be that way!' if nothing_said? remark
     'Whatever.'
   end
 
@@ -13,10 +16,10 @@ class Bob
   end
 
   def yell?(remark)
-    remark == remark.upcase
+    YELL === remark && remark == remark.upcase
   end
 
   def nothing_said?(remark)
-    remark.empty?
+    BLANK === remark
   end
 end
