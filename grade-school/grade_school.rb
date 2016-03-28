@@ -5,16 +5,17 @@ class School
     @grades = Hash.new { |h, k| h[k] = [] }
   end
 
-  def add(name, grade)
-    @grades[grade] << name
+  # requires ruby 2.3
+  def add(new_name, grade)
+    index = @grades[grade].bsearch_index { |name| name >= new_name } || -1
+    @grades[grade].insert(index, new_name)
   end
 
   def grade(grade)
-    @grades[grade].sort
+    @grades[grade]
   end
 
   def to_h
-    @grades.each_value { |names| names.sort! }
-    Hash[@grades.sort]
+    @grades.sort.to_h
   end
 end
